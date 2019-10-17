@@ -10,7 +10,16 @@
     <style>
       #play-button{
         position: fixed;
-        top: calc(50% - 1em);
+        top: calc(10% - 1em);
+        left: calc(50% - 100px);
+        width: 200px;
+        height: 2em;
+        z-index: 10;
+      }
+
+      #stop-button{
+        position: fixed;
+        top: calc(15% - 1em);
         left: calc(50% - 100px);
         width: 200px;
         height: 2em;
@@ -21,15 +30,16 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
+  <button id="stop-button">Stop Video</button>
   <button id="play-button">Begin Your Experience</button>
-
+  
     <a-scene embedded arjs>
-        <a-assets>
-            <video id="test" webkit-playsinline playsinline autoplay= 'false' preload="auto" loop="true" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"></video>
+        <a-assets >
+            <video rotation='90 90 0'  id="test" webkit-playsinline playsinline preload="auto" loop="false" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"></video>
           </a-assets>
   	<a-marker preset="hiro">
             <!-- <a-box position='0 0.5 0' material='color: yellow;'></a-box>-->        
-    <a-video rotation='90 180 0' src="#test" width="3" height="1.5"></a-video>  
+    <a-video src="#test" width="3" height="1.5"></a-video>  
   </a-marker>
   	<a-entity camera></a-entity>
     </a-scene>
@@ -38,17 +48,35 @@
   </body>
 
   <script>
-
+    var theVideo = document.querySelector('#test');
+    var playBtn = document.getElementById("#play-button");
+    var stopBtn = document.getElementById("#stop-button");
     // Play button, required by browsers to grab user interaction before autoplaying videos.
     document.querySelector('#play-button').addEventListener("click", function(e){
-    startStuff();  // launch the first voice over
+    startStuff(); 
     this.style.display = 'none';
+    }, false);
+
+    document.querySelector('#stop-button').addEventListener("click", function(e){
+    stopStuff();  
+    this.style.display = 'none';
+    
     }, false);
     
     function startStuff(){
-        var theVideo = document.querySelector('#test');
+        
         theVideo.play();
+        stopBtn.display = 'block';
+        playBtn.display = 'none';
+        // var theAudio = document.querySelector('#v1');
+        // theAudio.components.sound.playSound();
+    }
+
+    function stopStuff(){
     
+      theVideo.pause();
+      playBtn.display = 'block';
+      stopBtn.display = 'none';
         // var theAudio = document.querySelector('#v1');
         // theAudio.components.sound.playSound();
     }
