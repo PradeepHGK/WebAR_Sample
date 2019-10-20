@@ -3,12 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WebAR PradeepHGK</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="https://raw.githack.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
     <!-- <script src="js/interaction.js"></script> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='localSytleSheet' href="/style.css">
+
     <style>
       #play-button{
         position: fixed;
@@ -31,12 +35,25 @@
 
 </head>
 
-<body style='margin : 0px; overflow: hidden;'>
+<body>
+  <!-- overflow: hidden; -->
+  <!-- style='margin : 0px;' -->
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-expand-md navbar-light bg-light"></nav>
     <div class="container-fluid">
-      
+      <a class="navbar-brand" href="#">
+        <img src="/buttons/play.png" alt="">
+      </a>
+    </div>
+
+  <!-- Nav bar End -->
+      <div class="container py-3">
+          <button class="btn btn-primary" id="play-button">Begin Your Experience</button>
+          <button class="btn btn-dark" id="stop-button">Stop Video</button>          
       </div>
-  <button id="stop-button">Stop Video</button>
-  <button id="play-button">Begin Your Experience</button>
+
+        
+  
   
     <a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 5x5; debugUIEnabled: false;' vr-mode-ui="enabled: false" >
         <a-assets >
