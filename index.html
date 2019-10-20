@@ -2,11 +2,13 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://raw.githack.com/jeromeetienne/AR.js/1.7.5/aframe/build/aframe-ar.js"></script>
-    <script src="js/interaction.js"></script>
-
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
+    <!-- <script src="js/interaction.js"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
       #play-button{
         position: fixed;
@@ -25,26 +27,74 @@
         height: 2em;
         z-index: 10;
       }
-  </style>
+  </style> 
 
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
+    <div class="container-fluid">
+      
+      </div>
   <button id="stop-button">Stop Video</button>
   <button id="play-button">Begin Your Experience</button>
   
-    <a-scene embedded arjs>
+    <a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 5x5; debugUIEnabled: false;' vr-mode-ui="enabled: false" >
         <a-assets >
             <video   id="test" webkit-playsinline playsinline preload="auto" loop="false" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"></video>
+            <!-- <video   id="newPatt" webkit-playsinline playsinline autoplay='true' preload="auto" loop="true" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"></video> -->
           </a-assets>
   	<a-marker preset="hiro">
             <!-- <a-box position='0 0.5 0' material='color: yellow;'></a-box>-->        
     <a-video rotation='-90 360 0' src="#test" width="1.5" height="1.5"></a-video>  
   </a-marker>
-  	<a-entity camera></a-entity>
+
+ 
+  <!-- barcode -->
+  <a-marker type='barcode' value='50'>
+    <!-- Green box -->
+    <!-- <a-box position='0 0 0' material='color: white;'></a-box> -->
+    <a-video rotation='-90 360 0' src="#test" width="1.5" height="2"></a-video>  
+  </a-marker>
+
+  <a-marker preset='custom' type='pattern' url='https://skarredghost.com/AR/pattern-Skarredghost_marker.patt'>
+         
+    <!-- Here we define the content to show on the marker when it gets detected: a unit cube that lies on the floor and that is red -->
+    <a-box position='0 0.5 0' color="red"></a-box>
+   
+ </a-marker>
+  
+  <a-marker type='pattern' url='http://examples.org/kanji.patt'>
+    <!-- <a-video rotation='-90 360 0' src="#newPatt" width="1" height="2"></a-video> -->
+  </a-marker>
+
+  <a-marker preset='kanji'>
+    <a-box position='0 0.5 0' material='color: blue;'></a-box>
+    <!-- <a-video rotation='-90 360 0' src="#newPatt" width="1" height="2"></a-video> -->
+  </a-marker>
+
+
+  <!-- Barcode value 2 -->
+  <a-marker type="barcode" value="2">
+		 
+    <!-- A yellow box -->
+    <a-box position='0 0.5 0' color="yellow"></a-box>
+          
+       </a-marker>
+
+    <a-marker type="barcode" value="3">
+		 
+        <!-- A brown box -->
+      <a-box position='0 0.5 0' color="brown"></a-box>
+              
+    </a-marker>
+
+
+  <a-entity camera></a-entity>
     </a-scene>
     
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 
   <script>
@@ -54,12 +104,12 @@
     // Play button, required by browsers to grab user interaction before autoplaying videos.
     document.querySelector('#play-button').addEventListener("click", function(e){
     startStuff(); 
-    this.style.display = 'none';
+    // this.style.display = 'none';
     }, false);
 
     document.querySelector('#stop-button').addEventListener("click", function(e){
     stopStuff();  
-    this.style.display = 'none';
+    // this.style.display = 'none';
     
     }, false);
     
